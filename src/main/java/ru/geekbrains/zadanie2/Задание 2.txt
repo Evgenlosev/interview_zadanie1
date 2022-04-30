@@ -1,0 +1,8 @@
+Ошибки: вот тут:
+    class Lorry extends Car, Moveable, Stopable {}
+Интерфейсы должны быть implements:
+    class Lorry extends Car implements Moveable, Stopable {}
+Кроме того в классе Lorry не перопределен абстрактный метод класса родителя open();
+
+Оптимизация: Поскольку все машины умеют двигаться и останавливаться, можно интерфейсы Moveable и Stopable имплементить
+в класс Car или просто в класс Car добавить абстрактные методы move() и stop() и избавиться от интерфейсов.
