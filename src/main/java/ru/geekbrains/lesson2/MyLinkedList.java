@@ -5,43 +5,41 @@ public class MyLinkedList<E> {
     private Node<E> first = new Node<>();
     private Node<E> last = new Node<>();
 
-    public int size = 0;
+    private int size = 0;
 
     public MyLinkedList() {
         first.next = last;
         last.previous = first;
     }
 
-    public Node getFirst() {
-        return first;
+    public E getFirst() {
+        return first.value;
     }
 
-    public void setFirst(Node first) {
-        this.first = first;
+    public E getLast() {
+        return last.value;
     }
 
-    public Node getLast() {
-        return last;
-    }
-
-    public void setLast(Node last) {
-        this.last = last;
+    public int size() {
+        return size;
     }
 
     public void add(E element) {
-        size++;
         if (size == 0) {
             first.value = element;
+            size++;
             return;
         }
         if (size == 1) {
             last.value = element;
+            size++;
             return;
         }
         Node<E> node = new Node<>(element);
         last.next = node;
         node.previous = last;
         last = node;
+        size++;
     }
 
     public void add(int index, E element) {
@@ -133,13 +131,29 @@ public class MyLinkedList<E> {
         size = 0;
     }
 
-
-    public void printAll() {
+    public int indexOf(E element) {
         Node currentNode = first;
-        while (currentNode != null) {
-            System.out.println(currentNode.value);
+        for (int i = 0; i < size; i++) {
+            if (currentNode.value.equals(element)) {
+                return i;
+            }
             currentNode = currentNode.next;
         }
+        return -1;
+    }
+
+
+    public void printAll() {
+        if (size == 0) {
+            System.out.println("null");
+            return;
+        }
+        Node currentNode = first;
+        while (currentNode != null) {
+            System.out.print(currentNode.value + " ");
+            currentNode = currentNode.next;
+        }
+        System.out.println();
     }
 
     private class Node<E> {
